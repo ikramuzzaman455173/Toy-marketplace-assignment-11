@@ -1,0 +1,45 @@
+{
+  "name": "toy-marketplace-client-side",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
+    "aos": "^2.3.4",
+    "daisyui": "^2.51.6",
+    "firebase": "^9.22.0",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-image-magnify": "^2.7.4",
+    "react-loader-spinner": "^5.3.4",
+    "react-masonry-css": "^1.0.16",
+    "react-rating": "^2.0.5",
+    "react-responsive-masonry": "^2.1.7",
+    "react-router-dom": "^6.10.0",
+    "react-scroll": "^1.8.9",
+    "react-tabs": "^6.0.1",
+    "react-toastify": "^9.1.2",
+    "react-tooltip": "^5.13.1",
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.7.5",
+    "tailwindcss-classnames": "^3.0.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.3"
+  }
+}
