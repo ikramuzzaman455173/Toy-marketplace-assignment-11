@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import ToysRusBanner from '../Pages/SharedPage/ToysRusBanner'
 import { Link } from 'react-router-dom'
 import useTitle from '../MyHooks/DynamicTitle'
+import ToysRusBanner from '../Pages/SharedPage/ToysRusBanner'
 
 const AllToys = () => {
   const [toysData, setToysData] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
   const [sortingOrder, setSortingOrder] = useState("");
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(5)
+  const [totalItems, setTotalItems] = useState(0)
+  useEffect(() => {
+    fetch(`http://localhost:4000/totalToys`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setTotalItems(data.count)
+      }).catch(error => console.log(`404 page not found ${error}`))
+  }, [])
+
   useTitle('AllToys Page')
 
   useEffect(() => {
-    fetch(`https://toy-marketplace-server-side-ten.vercel.app/allToys?sort=${sortingOrder}`)
+    fetch(`http://localhost:4000/allToys?sort=${sortingOrder}&limit=${limit}&page=${page}`)
       .then(response => response.json())
       .then(data => {
         // console.log(data);
@@ -35,7 +47,7 @@ const AllToys = () => {
         setToysData(sortedData);
       })
       .catch(error => console.log(`404 page not found ${error}`));
-  }, [searchQuery, sortingOrder]); // Include searchQuery and sortingOrder as dependencies
+  }, [searchQuery, sortingOrder, page, limit]); // Include searchQuery and sortingOrder as dependencies
 
   return (
     <>
@@ -255,7 +267,8 @@ const AllToys = () => {
                     return (
                       <tr key={toys._id}>
                         <td className="px-6 py-4 text-sm text-slate-700 font-bold text-[17px] whitespace-nowrap">
-                          {index + 1}
+                          {/* {pageNumbers?.map(num=><p>{num}</p>)} */}
+                           {(page - 1) * limit + index + 1}
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-700 font-bold text-[17px] whitespace-nowrap">
                           {toys.seller_name}
@@ -287,8 +300,28 @@ const AllToys = () => {
           </div>
         </div>
       </div>
+      <div className="flex justify-between items-center">
+        <div className="join text-center mx-20 my-20">
+          <button className="join-item btn" onClick={() => {
+            page === 1 ? setPage(1) : setPage(page - 1)
+          }} disabled={page === 1}>«</button>
+          <button className="join-item btn">Page {page}</button>
+          <button className="join-item btn" onClick={() => {
+            page === Math.round(totalItems / limit) ? setPage(Math.round(totalItems / limit)) : setPage(page + 1)
+          }} disabled={page === Math.round(totalItems / limit)}>»</button>
+        </div>
+
+        <select className="select select-success w-full max-w-xs mx-20" value={limit} onChange={e => setLimit(e.target.value)}>
+          <option disabled>Select Show The View 1 Page Total Items?</option>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
+      </div>
     </>
   )
 }
 
 export default AllToys
+

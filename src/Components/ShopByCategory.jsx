@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import InfoText from '../Pages/SharedPage/InfoText';
-import Rating from "react-rating"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import {FaStar,FaRegStar} from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { FaRegStar, FaStar } from "react-icons/fa";
+import Rating from "react-rating";
 import { Link } from 'react-router-dom';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import InfoText from '../Pages/SharedPage/InfoText';
 const ShopByCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [data, setData] = useState([])
@@ -16,7 +16,7 @@ const ShopByCategory = () => {
   };
 
   useEffect(() => {
-    fetch('https://toy-marketplace-server-side-ten.vercel.app/toysCategory').then(response => response.json()).then(data => {
+    fetch('http://localhost:4000/toysCategory').then(response => response.json()).then(data => {
       // console.log(data)
       setData(data)
     }).catch(error => console.log(`404 page not found ${error}`))

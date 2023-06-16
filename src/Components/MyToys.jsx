@@ -4,8 +4,8 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../AuthProvider/Authprovider';
-import ToysRusBanner from '../Pages/SharedPage/ToysRusBanner';
 import useTitle from '../MyHooks/DynamicTitle';
+import ToysRusBanner from '../Pages/SharedPage/ToysRusBanner';
 
 
 const MyToys = () => {
@@ -13,7 +13,7 @@ const MyToys = () => {
   const { user } = useContext(AuthContext)
   useTitle('MyToys Page')
   useEffect(() => {
-    fetch(`https://toy-marketplace-server-side-ten.vercel.app/myToys?seller_email=${user.email}`)
+    fetch(`http://localhost:4000/myToys?seller_email=${user.email}`)
       .then(response => response.json())
       .then(data => {
         // console.log(data)
@@ -36,7 +36,7 @@ const MyToys = () => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://toy-marketplace-server-side-ten.vercel.app/allToys/${id}`, {
+          fetch(`http://localhost:4000/allToys/${id}`, {
             method: "DELETE",
           })
             .then(response => response.json())

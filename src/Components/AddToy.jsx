@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../AuthProvider/Authprovider';
+import useTitle from '../MyHooks/DynamicTitle';
 import InfoText from '../Pages/SharedPage/InfoText';
 import ToysRusBanner from '../Pages/SharedPage/ToysRusBanner';
-import useTitle from '../MyHooks/DynamicTitle';
 
 const AddToy = () => {
   const { user } = useContext(AuthContext)
@@ -22,7 +22,7 @@ const AddToy = () => {
     const subcategory = form.subcategory.value
     const newToy = { seller_name, seller_email, toysname, toyimg, price, rating, quantity, description, subcategory }
     // console.log(newToy);
-    fetch(`https://toy-marketplace-server-side-ten.vercel.app/allToys`, {
+    fetch(`http://localhost:4000/allToys`, {
           method: "POST",
           headers: {
             'content-type':'application/json'

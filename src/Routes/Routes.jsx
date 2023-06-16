@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainPageLayout from "../Pages/PageLayout/MainPageLayout";
-import Home from "../Pages/Home/Home";
+import AddToy from "../Components/AddToy";
+import AllToys from "../Components/AllToys";
+import Blogs from "../Components/Blogs";
+import ErrorPage from "../Components/ErrorPage";
 import Login from "../Components/Login";
+import UpdateToy from "../Components/MyToyUpdate";
+import MyToys from "../Components/MyToys";
 import Register from "../Components/Register";
 import ToyDetails from "../Components/ToyDetails";
+import Home from "../Pages/Home/Home";
+import MainPageLayout from "../Pages/PageLayout/MainPageLayout";
 import PrivateRoute from "./PrivateRoute";
-import ErrorPage from "../Components/ErrorPage";
-import Blogs from "../Components/Blogs";
-import AllToys from "../Components/AllToys";
-import AddToy from "../Components/AddToy";
-import MyToys from "../Components/MyToys";
-import UpdateToy from "../Components/MyToyUpdate";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/toy/:id',
         element:<PrivateRoute> <ToyDetails /></PrivateRoute>,
-        loader:({params})=>fetch(`https://toy-marketplace-server-side-ten.vercel.app/toy/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:4000/toy/${params.id}`)
       },
       {
         path: '/addToys',
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: '/updateToy/:id',
         element:<PrivateRoute><UpdateToy /></PrivateRoute>,
-        loader:({params})=>fetch(`https://toy-marketplace-server-side-ten.vercel.app/toy/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:4000/toy/${params.id}`)
       },
       {
         path: '/myToys',
